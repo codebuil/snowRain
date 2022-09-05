@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<title>catch me.</title>
+		<style>
+			#hello{
+				height:550px;
+				width:600px;
+			}
+			#hworld{
+				position:relative;
+				height:50px;
+				width:160px;
+				top: 0px
+				left: 0px
+			}
+		</style>
+	</head>
+	<body bgColor='green'>
+		<div id="hello" bgColor="green">
+		
+<canvas id="canvas1" width="500" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+		</div>
+		<script>
+	
+	function f1(){
+			var x=0;
+			var y=1;
+			ctx.beginPath();
+ctx.rect( op.around(x) , op.around(y) , 3 ,3);
+ctx.fillStyle = "black";
+ctx.fill();
+			
+	}
+	
+var c = document.getElementById("canvas1");
+var ctx = c.getContext("2d");
+	var op;
+	
+	
+	
+	fetch("around.wasm") 
+   .then(bytes => bytes.arrayBuffer()) 
+   .then(mod => WebAssembly.compile(mod)) 
+   .then(module => { 
+      let instance = new WebAssembly.Instance(module);
+	op=instance.exports;
+
+
+});
+
+	setInterval(f1,40);
+
+	</script>
+	</body>
+</html>
